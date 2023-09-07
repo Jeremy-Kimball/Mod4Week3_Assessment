@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+@{
+    var cookie = Context.Request.Cookies.Where(c => c.Key == "currentUser").FirstOrDefault();
+}
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,7 +31,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (@cookie.Value != null)
+                        {
+                            <li class="nav-link text-dark">Current User: <span class="text-success">@cookie.Value</span></li>
+                        }
+                        else
+                        {
+                            <li class="nav-link text-dark">Current User: <span class="text-danger">No current user</span></li>
+                        }
                     </ul>
+
                 </div>
             </div>
         </nav>

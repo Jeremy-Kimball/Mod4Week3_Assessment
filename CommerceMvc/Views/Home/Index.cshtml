@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var cookie = Context.Request.Cookies.Where(c => c.Key == "currentUser").FirstOrDefault();
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <a href="/home/login"><button>Log In</button></a> <a href="/home/logout"><button>Log Out</button></a>
+    @if(@cookie.Value != null)
+    {
+        <p>Current User: @cookie.Value</p>
+    }
+    else
+    {
+        <p>Current User: No current user</p>
+    }
 </div>

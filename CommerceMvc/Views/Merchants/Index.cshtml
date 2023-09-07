@@ -1,9 +1,20 @@
 ﻿@model IEnumerable<Merchant>
-
+@{
+    var cookie = Context.Request.Cookies.Where(c => c.Key == "currentUser").FirstOrDefault();
+}
 <h1>Merchants</h1>
 <a href="/merchants/new">Add a Merchant</a>
 
 @foreach (var merchant in Model)
 {
     <a href="/merchants/@merchant.Id"><h3>@merchant.Name</h3></a>
+}
+
+@if (@cookie.Value != null)
+{
+    <p>Current User: @cookie.Value</p>
+}
+else
+{
+    <p>Current User: No current user</p>
 }
